@@ -1,8 +1,0 @@
-#Ignore all the file in Output folder
-Output/
-#Ignore .o file
-*.o
-#Ignore .a file
-*.a
-#Ignore .a file
-*.d

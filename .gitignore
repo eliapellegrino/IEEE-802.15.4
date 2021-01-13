@@ -1,8 +1,12 @@
 #Ignore all the file in Output folder
 **/Output/
 #Ignore .o file
-*.o
+**/*.o
 #Ignore .a file
-*.a
+**/*.a
 #Ignore .a file
-*.d
+**/*.d
+#Ignore .emSession file
+**/*.emSession
+#Ignore None file
+**/None

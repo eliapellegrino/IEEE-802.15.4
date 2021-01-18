@@ -408,7 +408,7 @@ void timer_acquisition_event_handler(nrf_timer_event_t event_type, void* p_conte
   NRF_LOG_INFO("%x %x %x %x %x", packet[MAC_PAYLOAD_POS],packet[MAC_PAYLOAD_POS+1],packet[MAC_PAYLOAD_POS+2],packet[MAC_PAYLOAD_POS+3],packet[MAC_PAYLOAD_POS+4]);
   do
   {
-    tx_in_progress = nrf_802154_transmit_raw(packet, false);
+    tx_in_progress = nrf_802154_transmit_raw(packet, true);
     //NRF_LOG_INFO("Trasmission result: %x, Count = %d", tx_in_progress, count);
     if (tx_in_progress == 1)
     {

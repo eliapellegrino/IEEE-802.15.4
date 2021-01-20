@@ -89,8 +89,8 @@ static volatile bool tx_in_progress = false;
 static volatile bool tx_done = true;
 static volatile bool begin_tx = false;
 
-bool enable_pin_out = true;
-bool enable_uart = true;
+bool enable_pin_out = false;
+bool enable_uart = false;
 
 bool notif_on = false;
 bool last_packet = false;
@@ -372,7 +372,7 @@ static void config_802154()
   //Set  radio output power (dBm) (@ref nrf52840_bitfields.h)
   int8_t power = 0;
   nrf_802154_tx_power_set(power);
-  NRF_LOG_INFO("Power set to : %d dBm", power);
+  //NRF_LOG_INFO("Power set to : %d dBm", power);
   // Set PA e LNA PIN
   set_pa_lna();
   // Configure Packet
@@ -405,7 +405,7 @@ void timer_acquisition_event_handler(nrf_timer_event_t event_type, void* p_conte
   memcpy(&packet[MAC_PAYLOAD_POS+1], int_event, MAX_PAYLOAD_SIZE-1);
   memset(int_event, 0, MAX_PAYLOAD_SIZE);
   current_index = 0;
-  NRF_LOG_INFO("%x %x %x %x %x", packet[MAC_PAYLOAD_POS],packet[MAC_PAYLOAD_POS+1],packet[MAC_PAYLOAD_POS+2],packet[MAC_PAYLOAD_POS+3],packet[MAC_PAYLOAD_POS+4]);
+  //NRF_LOG_INFO("%x %x %x %x %x", packet[MAC_PAYLOAD_POS],packet[MAC_PAYLOAD_POS+1],packet[MAC_PAYLOAD_POS+2],packet[MAC_PAYLOAD_POS+3],packet[MAC_PAYLOAD_POS+4]);
   do
   {
     tx_in_progress = nrf_802154_transmit_raw(packet, true);

@@ -67,7 +67,9 @@
 #include "nrf_drv_gpiote.h"
 #include "nrf_drv_uart.h"
 
-
+#define ENABLE_NRF_LOG_INFO            0
+#define ENABLE_TIMESTAMP               0
+#define ENABLE_PA_LNA_PIN              0
 #define TX_BUFF_SIZE_UART              20
 
 #define WINDOW_LENGTH                  7
@@ -126,7 +128,9 @@ void uart_event_handler(nrf_drv_uart_event_t * p_event, void * p_context)
   case NRF_DRV_UART_EVT_TX_DONE:
   {
     memset(tx_uart_buff, 0xff, sizeof(tx_uart_buff));
+    #if ENABLE_NRF_LOG_INFO
     NRF_LOG_INFO("TX DONE");
+    #endif
     if (last_packet)
     {
       last_packet = false;
@@ -175,7 +179,9 @@ static void button_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t actio
   case BUTTON_1:
   {
     TIMER_TIMESTAMP.p_reg->TASKS_CAPTURE[0] = 1;
+    #if ENABLE_NRF_LOG_INFO
     NRF_LOG_INFO("Timer started at : %d", TIMER_TIMESTAMP.p_reg->CC[0]);
+    #endif
     // Send notification packet (guardare bene come funziona il l'ack timeout)
     set_frame_control(notif_packet, false, true, true, true);
     notif_packet[MAC_PAYLOAD_POS] = count;
@@ -265,7 +271,9 @@ static void addr_set()
   laddr[6] = (EXT_ADDR & 0x00ff000000000000) >> 48;
   laddr[7] = (EXT_ADDR & 0xff00000000000000) >> 56;
   nrf_802154_extended_address_set(laddr);
+  #if ENABLE_NRF_LOG_INFO
   NRF_LOG_INFO("Short and Extended address correctly set: %x %x", laddr[6], laddr[7]);
+  #endif
 }
 static void set_pa_lna()
 {
@@ -289,7 +297,9 @@ static void set_pa_lna()
   ret_code_t err_code = nrf_fem_interface_configuration_set(&fem_conf);
   if (err_code == NRF_SUCCESS)
   {
+    #if ENABLE_NRF_LOG_INFO
     NRF_LOG_INFO("PA E LNA PIN SET");
+    #endif
   }
 
 }
@@ -368,13 +378,19 @@ static void config_802154()
   ppan_id[0] = PAN_ID & 0x00ff;
   ppan_id[1] = (PAN_ID & 0xff00) >> 8;
   nrf_802154_pan_id_set(ppan_id);
+  #if ENABLE_NRF_LOG_INFO
   NRF_LOG_INFO("Pan ID correctly set");
+  #endif
   //Set  radio output power (dBm) (@ref nrf52840_bitfields.h)
   int8_t power = 0;
   nrf_802154_tx_power_set(power);
-  //NRF_LOG_INFO("Power set to : %d dBm", power);
+  #if ENABLE_NRF_LOG_INFO
+  NRF_LOG_INFO("Power set to : %d dBm", power);
+  #endif
   // Set PA e LNA PIN
+  #if ENABLE_PA_LNA
   set_pa_lna();
+  #endif
   // Configure Packet
   configure_packets();
 }
@@ -397,7 +413,9 @@ void timer_acquisition_event_handler(nrf_timer_event_t event_type, void* p_conte
     //WAIT
   }
   count++;
-  //NRF_LOG_INFO("STATE: %x", nrf_802154_state_get());
+  #if ENABLE_NRF_LOG_INFO
+  NRF_LOG_INFO("STATE: %x", nrf_802154_state_get());
+  #endif
   // Set SN to counter
   packet[SN_POS] = count;
   // Primo byte per il numero di event in quella finestra
@@ -405,11 +423,15 @@ void timer_acquisition_event_handler(nrf_timer_event_t event_type, void* p_conte
   memcpy(&packet[MAC_PAYLOAD_POS+1], int_event, MAX_PAYLOAD_SIZE-1);
   memset(int_event, 0, MAX_PAYLOAD_SIZE);
   current_index = 0;
-  //NRF_LOG_INFO("%x %x %x %x %x", packet[MAC_PAYLOAD_POS],packet[MAC_PAYLOAD_POS+1],packet[MAC_PAYLOAD_POS+2],packet[MAC_PAYLOAD_POS+3],packet[MAC_PAYLOAD_POS+4]);
+  #if ENABLE_NRF_LOG_INFO
+  NRF_LOG_INFO("%x %x %x %x %x", packet[MAC_PAYLOAD_POS],packet[MAC_PAYLOAD_POS+1],packet[MAC_PAYLOAD_POS+2],packet[MAC_PAYLOAD_POS+3],packet[MAC_PAYLOAD_POS+4]);
+  #endif
   do
   {
     tx_in_progress = nrf_802154_transmit_raw(packet, true);
-    //NRF_LOG_INFO("Trasmission result: %x, Count = %d", tx_in_progress, count);
+    #if ENABLE_NRF_LOG_INFO
+    NRF_LOG_INFO("Trasmission result: %x, Count = %d", tx_in_progress, count);
+    #endif
     if (tx_in_progress == 1)
     {
       tx_done = false;
@@ -435,18 +457,20 @@ void timer_acquisition_event_handler(nrf_timer_event_t event_type, void* p_conte
 static void timers_init()
 {
   nrf_drv_timer_config_t timer_cfg = NRF_DRV_TIMER_DEFAULT_CONFIG;
+  ret_code_t err_code;
   // TIMER TIMESTAMP
+  #if ENABLE_TIMESTAMP
   timer_cfg.bit_width = NRF_TIMER_BIT_WIDTH_32;
   timer_cfg.frequency = NRF_TIMER_FREQ_1MHz;
-  ret_code_t err_code = nrf_drv_timer_init(&TIMER_TIMESTAMP, &timer_cfg, timer_timestamp_event_handler);
+  err_code = nrf_drv_timer_init(&TIMER_TIMESTAMP, &timer_cfg, timer_timestamp_event_handler);
   APP_ERROR_CHECK(err_code);
+  #endif
   // TIMER ACQUISITION
   timer_cfg.bit_width = NRF_TIMER_BIT_WIDTH_8;
   timer_cfg.frequency = NRF_TIMER_FREQ_31250Hz;
   err_code = nrf_drv_timer_init(&TIMER_ACQUISITION, &timer_cfg, timer_acquisition_event_handler);
   APP_ERROR_CHECK(err_code);
   uint32_t time_ticks = (WINDOW_LENGTH * 0.001) * 31250;
-  NRF_LOG_INFO("TIMEE TICKS: %d", time_ticks);
   nrf_drv_timer_extended_compare(&TIMER_ACQUISITION, NRF_TIMER_CC_CHANNEL0, time_ticks, NRF_TIMER_SHORT_COMPARE0_CLEAR_MASK, true);
   // Timer simulation
   timer_cfg.bit_width = NRF_TIMER_BIT_WIDTH_8;
@@ -498,7 +522,6 @@ int main(void)
   // End of configuration
   bsp_board_led_on(CONFIG_802154_COMPLETE_LED);
   TIMER_TIMESTAMP.p_reg->TASKS_START = 1;
-  NRF_LOG_INFO("IEEE 802.15.4 TRANSMITTER");
   while (true)
   {
     NRF_LOG_FLUSH();
@@ -518,14 +541,18 @@ void nrf_802154_transmitted_raw(const uint8_t* p_frame, uint8_t* p_ack, int8_t p
   {
     if (notif_on)
     {
+    #if ENABLE_NRF_LOG_INFO
       NRF_LOG_INFO("ACK RECEIVED: ON");
+      #endif
       TIMER_ACQUISITION.p_reg->TASKS_START = 1;
       nrf_drv_gpiote_in_event_enable(PIN_IN, true);
       bsp_board_led_on(NOTIF_ON_LED);
       begin_tx = true;
     } else
     {
+      #if ENABLE_NRF_LOG_INFO
       NRF_LOG_INFO("ACK RECEIVED: OFF");
+      #endif
       //TIMER_TIMESTAMP.p_reg->TASKS_CAPTURE[1] = 1;
       //NRF_LOG_INFO("Timer stopped at : %d", TIMER_TIMESTAMP.p_reg->CC[1]);
       // Disable PIN_IN sensing
@@ -540,15 +567,30 @@ void nrf_802154_transmitted_raw(const uint8_t* p_frame, uint8_t* p_ack, int8_t p
       last_packet = true;
     }
   }
+  #if ENABLE_NRF_LOG_INFO
   NRF_LOG_INFO("Trasmission done");
+  #endif
   nrf_802154_sleep();
 }
 
 /*Non chiamata perche #define ACK_TIMEOUT settato a 0*/
 void nrf_802154_tx_started (const uint8_t* p_frame)
 {
+  #if ENABLE_NRF_LOG_INFO
   NRF_LOG_INFO("Trasmission started");
+  #endif
 }
+/*
+void nrf_802154_cca_done(bool cca_status)
+{
+  if (cca_status)
+  {
+  NRF_LOG_INFO("CHANNEL FREE");
+  } else{
+    NRF_LOG_INFO("CHANNEL BUSY");
+  }
+}
+*/
 
 
 /**

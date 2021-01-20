@@ -66,11 +66,12 @@
 #include "nrf_drv_timer.h"
 #include "nrf_drv_gpiote.h"
 #include "nrf_drv_uart.h"
-
+/*-------------------------- VERSION WITHOUT CCA-------------------------*/
 #define ENABLE_NRF_LOG_INFO            0
 #define ENABLE_TIMESTAMP               0
 #define ENABLE_PA_LNA_PIN              0
 #define TX_BUFF_SIZE_UART              20
+#define TX_POWER                       0 /* Tx Power in dBm*/
 
 #define WINDOW_LENGTH                  7
 #define TIMER_SIMULATION_LENGTH        1 /*Simulazione onda quadra*/
@@ -382,8 +383,7 @@ static void config_802154()
   NRF_LOG_INFO("Pan ID correctly set");
   #endif
   //Set  radio output power (dBm) (@ref nrf52840_bitfields.h)
-  int8_t power = 0;
-  nrf_802154_tx_power_set(power);
+  nrf_802154_tx_power_set((int8_t)TX_POWER);
   #if ENABLE_NRF_LOG_INFO
   NRF_LOG_INFO("Power set to : %d dBm", power);
   #endif

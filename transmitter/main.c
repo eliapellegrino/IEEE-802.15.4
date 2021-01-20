@@ -66,6 +66,7 @@
 #include "nrf_drv_timer.h"
 #include "nrf_drv_gpiote.h"
 #include "nrf_drv_uart.h"
+/*-------------------VERSION WITH CCA----------------------------------*/
 
 #define ENABLE_NRF_LOG_INFO            0
 #define ENABLE_TIMESTAMP               0
@@ -74,6 +75,7 @@
 
 #define WINDOW_LENGTH                  7
 #define TIMER_SIMULATION_LENGTH        1 /*Simulazione onda quadra*/
+#define TX_POWER                       0 /*Power in dBm*/
 
 #define CONFIG_802154_COMPLETE_LED     BSP_BOARD_LED_0 /*I LED 1 e 2 non possono venire usati con 802.15.4*/
 #define NOTIF_ON_LED                   BSP_BOARD_LED_1
@@ -382,8 +384,7 @@ static void config_802154()
   NRF_LOG_INFO("Pan ID correctly set");
   #endif
   //Set  radio output power (dBm) (@ref nrf52840_bitfields.h)
-  int8_t power = 0;
-  nrf_802154_tx_power_set(power);
+  nrf_802154_tx_power_set((int8_t)TX_POWER);
   #if ENABLE_NRF_LOG_INFO
   NRF_LOG_INFO("Power set to : %d dBm", power);
   #endif

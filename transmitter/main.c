@@ -423,16 +423,12 @@ void timer_acquisition_event_handler(nrf_timer_event_t event_type, void* p_conte
   memcpy(&packet[MAC_PAYLOAD_POS+1], int_event, MAX_PAYLOAD_SIZE-1);
   memset(int_event, 0, MAX_PAYLOAD_SIZE);
   current_index = 0;
-<<<<<<< HEAD
-  //NRF_LOG_INFO("%x %x %x %x %x", packet[MAC_PAYLOAD_POS],packet[MAC_PAYLOAD_POS+1],packet[MAC_PAYLOAD_POS+2],packet[MAC_PAYLOAD_POS+3],packet[MAC_PAYLOAD_POS+4]);
-=======
   #if ENABLE_NRF_LOG_INFO
   NRF_LOG_INFO("%x %x %x %x %x", packet[MAC_PAYLOAD_POS],packet[MAC_PAYLOAD_POS+1],packet[MAC_PAYLOAD_POS+2],packet[MAC_PAYLOAD_POS+3],packet[MAC_PAYLOAD_POS+4]);
   #endif
->>>>>>> cca
   do
   {
-    tx_in_progress = nrf_802154_transmit_raw(packet, true);
+    tx_in_progress = nrf_802154_transmit_raw(packet, false);
     #if ENABLE_NRF_LOG_INFO
     NRF_LOG_INFO("Trasmission result: %x, Count = %d", tx_in_progress, count);
     #endif
@@ -584,17 +580,7 @@ void nrf_802154_tx_started (const uint8_t* p_frame)
   NRF_LOG_INFO("Trasmission started");
   #endif
 }
-/*
-void nrf_802154_cca_done(bool cca_status)
-{
-  if (cca_status)
-  {
-  NRF_LOG_INFO("CHANNEL FREE");
-  } else{
-    NRF_LOG_INFO("CHANNEL BUSY");
-  }
-}
-*/
+
 
 
 /**

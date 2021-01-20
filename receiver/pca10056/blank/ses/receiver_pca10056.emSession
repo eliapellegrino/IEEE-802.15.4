@@ -22,6 +22,7 @@
   <ProjectSessionItem path="receiver_pca10056"/>
   <ProjectSessionItem path="receiver_pca10056;receiver_pca10056"/>
   <ProjectSessionItem path="receiver_pca10056;receiver_pca10056;Application"/>
+  <ProjectSessionItem path="receiver_pca10056;receiver_pca10056;nRF_802154"/>
   <ProjectSessionItem path="receiver_pca10056;receiver_pca10056;nRF_Drivers"/>
   <ProjectSessionItem path="receiver_pca10056;receiver_pca10056;nRF_Libraries"/>
   <ProjectSessionItem path="receiver_pca10056;receiver_pca10056;nRF_Log"/>
@@ -62,9 +63,13 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="7" y="121" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../main.c" selected="0" top="114" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="12" y="188" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../main.c" selected="0" top="187" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="105" useTextEdit="1" openedFrom="C:/Users/eliap/Desktop/Tesi/Firmware/Segger/nRF52840/SDKT&amp;Z/examples/miei esempi/IEEE_802.15.4/receiver/main.c" useBinaryEdit="0" left="0" path="../../../../../../../integration/nrfx/legacy/nrf_drv_uart.c" selected="0" top="90" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../config/802154_config_mine.h" selected="1" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../config/802154_config_mine.h" selected="1" top="6" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="44" useTextEdit="1" openedFrom="C:/Users/eliap/Desktop/Tesi/Firmware/Segger/nRF52840/SDKT&amp;Z/examples/miei esempi/IEEE_802.15.4/receiver/main.c" useBinaryEdit="0" left="0" path="../../../../../../../external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154.c" selected="0" top="36" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="413" useTextEdit="1" openedFrom="C:/Users/eliap/Desktop/Tesi/Firmware/Segger/nRF52840/SDKT&amp;Z/external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154.c" useBinaryEdit="0" left="0" path="../../../../../../../external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154.h" selected="0" top="404" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="381" useTextEdit="1" openedFrom="C:/Users/eliap/Desktop/Tesi/Firmware/Segger/nRF52840/SDKT&amp;Z/external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154.c" useBinaryEdit="0" left="0" path="../../../../../../../external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154_config.h" selected="0" top="366" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="135" useTextEdit="1" openedFrom="C:/Users/eliap/Desktop/Tesi/Firmware/Segger/nRF52840/SDKT&amp;Z/external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154.c" useBinaryEdit="0" left="0" path="../../../../../../../external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154_const.h" selected="0" top="123" codecName="Default"/>
  </Files>
- <ARMCrossStudioWindow activeProject="receiver_pca10056" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/Users/eliap/Desktop/SynologyDrive/materiale elia/tesi/nRF52840/SDKT&amp;Z/modules/nrfx/drivers/src" debugSearchPath="" autoConnectCapabilities="3711"/>
+ <ARMCrossStudioWindow activeProject="receiver_pca10056" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/Users/eliap/Desktop/SynologyDrive/materiale elia/tesi/nRF52840/SDKT&amp;Z/modules/nrfx/drivers/src" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>

@@ -122,7 +122,7 @@ void uart_event_handler(nrf_drv_uart_event_t * p_event, void * p_context)
       {
         last_packet = false;
         ret_code_t err_code = nrf_drv_uart_tx(&uart_inst, tx_uart_buff, sizeof(tx_uart_buff));
-        NRF_LOG_INFO("ERR_CODE: %x", err_code);
+        ////NRF_LOG_INFO("ERR_CODE: %x", err_code);
          
       }
    } break;
@@ -152,7 +152,7 @@ static void button_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t actio
     memset(tx_uart_buff, 0xff, sizeof(tx_uart_buff));
     ret_code_t err_code = nrf_drv_uart_tx(&uart_inst, tx_uart_buff, sizeof(tx_uart_buff));
     APP_ERROR_CHECK(err_code);
-    NRF_LOG_INFO("OK");
+    ////NRF_LOG_INFO("OK");
    } break;
    case BUTTON_2:
    {
@@ -204,7 +204,7 @@ static void addr_set()
    laddr[6] = (EXT_ADDR & 0x00ff000000000000) >> 48;
    laddr[7] = (EXT_ADDR & 0xff00000000000000) >> 56;
    nrf_802154_extended_address_set(laddr);
-   NRF_LOG_INFO("Short and Extended address correctly set: %x %x", laddr[6], laddr[7]);
+   //NRF_LOG_INFO("Short and Extended address correctly set: %x %x", laddr[6], laddr[7]);
 }
 static void set_pa_lna()
 {
@@ -228,7 +228,7 @@ static void set_pa_lna()
    ret_code_t err_code = nrf_fem_interface_configuration_set(&fem_conf);
    if (err_code == NRF_SUCCESS)
    {
-      NRF_LOG_INFO("PA E LNA PIN SET");
+      //NRF_LOG_INFO("PA E LNA PIN SET");
    }
 
 }
@@ -241,13 +241,14 @@ static void config_802154()
    ppan_id[0] = PAN_ID & 0x00ff;
    ppan_id[1] = (PAN_ID & 0xff00) >> 8;
    nrf_802154_pan_id_set(ppan_id);
-   NRF_LOG_INFO("Pan ID correctly set");
+   //NRF_LOG_INFO("Pan ID correctly set");
    //Set  radio output power (dBm) (@ref nrf52840_bitfields.h)
    int8_t power = 0;
    nrf_802154_tx_power_set(power);
-   NRF_LOG_INFO("Power set to : %d dBm", power);
+   //NRF_LOG_INFO("Power set to : %d dBm", power);
    // Set PA e LNA PIN
    set_pa_lna();
+   nrf_802154_channel_set(CHANNEL);
 }
 void timer_timestamp_event_handler(nrf_timer_event_t event_type, void* p_context)
 {
@@ -263,9 +264,9 @@ void timer_reconstruction_event_handler(nrf_timer_event_t event_type, void* p_co
    ret_code_t err_code;
    nrf_gpio_pin_set(PIN_OUT);
    rtc.p_reg->TASKS_START = 1;
-   //NRF_LOG_INFO("PIN OUT settatoo\n");
+   ////NRF_LOG_INFO("PIN OUT settatoo\n");
    TIMER_TIMESTAMP.p_reg->TASKS_CAPTURE[0] = 1;
-   NRF_LOG_INFO("event: %d ON at: %d", event_type, TIMER_TIMESTAMP.p_reg->CC[0]);
+   //NRF_LOG_INFO("event: %d ON at: %d", event_type, TIMER_TIMESTAMP.p_reg->CC[0]);
    if (packet[index] != 0)
    {
       TIMER_RECONSTRUCTION.p_reg->CC[(event_type - 320) / 4] = packet[index];
@@ -280,9 +281,9 @@ void timer_reconstruction_event_handler(nrf_timer_event_t event_type, void* p_co
    {
       TIMER_RECONSTRUCTION.p_reg->TASKS_STOP = 1;
       TIMER_RECONSTRUCTION.p_reg->TASKS_CLEAR = 1;
-      NRF_LOG_INFO("STOPPED");
+      //NRF_LOG_INFO("STOPPED");
    }
-   //NRF_LOG_INFO("INSIDE HANDLER");
+   ////NRF_LOG_INFO("INSIDE HANDLER");
 }
 
 static void timers_init()
@@ -299,7 +300,7 @@ static void timers_init()
    err_code = nrf_drv_timer_init(&TIMER_ACQUISITION, &timer_cfg, timer_acquisition_event_handler);
    APP_ERROR_CHECK(err_code);
    uint32_t time_ticks = (WINDOW_LENGTH * 0.001) * 31250;
-   NRF_LOG_INFO("TIMEE TICKS: %d", time_ticks);
+   //NRF_LOG_INFO("TIMEE TICKS: %d", time_ticks);
    nrf_drv_timer_extended_compare(&TIMER_ACQUISITION, NRF_TIMER_CC_CHANNEL0, time_ticks, NRF_TIMER_SHORT_COMPARE0_CLEAR_MASK, true);
    // TIMER RECONSTRUCTION
    timer_cfg.frequency = NRF_TIMER_FREQ_31250Hz;
@@ -341,7 +342,7 @@ static void rtc_handler(nrf_drv_rtc_int_type_t int_type)
   if (int_type == NRFX_RTC_INT_TICK)
   {
     TIMER_TIMESTAMP.p_reg->TASKS_CAPTURE[0] = 1;
-    NRF_LOG_INFO("OFF: %d", TIMER_TIMESTAMP.p_reg->CC[0]);
+    //NRF_LOG_INFO("OFF: %d", TIMER_TIMESTAMP.p_reg->CC[0]);
     nrf_gpio_pin_clear(PIN_OUT);
     rtc.p_reg->TASKS_STOP = 1;
     //rtc.p_reg->TASKS_CLEAR = 1;
@@ -385,10 +386,10 @@ int main(void)
    rtc_init();
     // End of configuration
    bsp_board_led_on(CONFIG_802154_COMPLETE_LED);
-   NRF_LOG_INFO("IEEE 802.15.4 RECEIVER");
+   //NRF_LOG_INFO("IEEE 802.15.4 RECEIVER");
    TIMER_TIMESTAMP.p_reg->TASKS_START = 1;
    bool result = nrf_802154_receive();
-   NRF_LOG_INFO("Enter in RX state with code: %d", result);
+   //NRF_LOG_INFO("Enter in RX state with code: %d", result);
    while (true)
    {
       NRF_LOG_FLUSH();
@@ -412,21 +413,21 @@ void nrf_802154_received_raw(uint8_t * p_data, int8_t power, uint8_t lqi)
    if (p_data[PHR_POS] == MAC_HEADER_SIZE + FCS_SIZE + NOTIF_PACKET_PAYLOAD_SIZE + PHR_SIZE)
    {
       count = p_data[MAC_PAYLOAD_POS];
-       //NRF_LOG_INFO("Frame control: %x", p_data[FC_POS + 1] << 8 | p_data[FC_POS]);
+       ////NRF_LOG_INFO("Frame control: %x", p_data[FC_POS + 1] << 8 | p_data[FC_POS]);
       // Controllo il pending bit: se = 0 notifiche disattivate, se = 1 notifiche attive
       if ((mask_fc << FRAME_PENDING_BIT_POS) & (p_data[FC_POS + 1] << 8 | p_data[FC_POS]))
       {
          // Pending bit settato
          count = p_data[MAC_PAYLOAD_POS];
-         NRF_LOG_INFO("Notifiche on: %d", count);
+         //NRF_LOG_INFO("Notifiche on: %d", count);
          bsp_board_led_on(NOTIF_ON_LED);
       } else
       {
          // Pending bit non settato
          count = p_data[MAC_PAYLOAD_POS];
-         NRF_LOG_INFO("Notifiche off: %d", count);
+         //NRF_LOG_INFO("Notifiche off: %d", count);
          bsp_board_led_off(NOTIF_ON_LED);
-         NRF_LOG_INFO("PACKET_LOST: %d", packet_lost);
+         //NRF_LOG_INFO("PACKET_LOST: %d", packet_lost);
          tx_uart_buff[0] = (packet_lost & 0x00ff) >> 0;
          tx_uart_buff[1] = (packet_lost & 0xff00) >> 8;
          ret_code_t err_code = nrf_drv_uart_tx(&uart_inst, tx_uart_buff, sizeof(tx_uart_buff));
@@ -437,7 +438,7 @@ void nrf_802154_received_raw(uint8_t * p_data, int8_t power, uint8_t lqi)
    memcpy(packet, p_data, MAX_PACKET_SIZE);
    // BUG
    //memcpy(tx_uart_buff, &packet[MAC_PAYLOAD_POS+1], 20);
-   memcpy(&tx_uart_buff[2], &packet[MAC_PAYLOAD_POS+1], sizeof(tx_uart_buff)-2);
+   memcpy(&tx_uart_buff[2], &packet[MAC_PAYLOAD_POS], sizeof(tx_uart_buff)-2);
    nrf_802154_buffer_free_raw(p_data);
    /*Per scrittura su uart e script Matlab*/
    tx_uart_buff[0] = packet[SN_POS];
@@ -450,7 +451,7 @@ void nrf_802154_received_raw(uint8_t * p_data, int8_t power, uint8_t lqi)
       if (count != packet[SN_POS])
       {
          TIMER_TIMESTAMP.p_reg->TASKS_CAPTURE[0] = 1;
-        //NRF_LOG_INFO("Problem: received: %d, count: %d, now: %d", packet[SN_POS], count, TIMER_TIMESTAMP.p_reg->CC[0]);
+        ////NRF_LOG_INFO("Problem: received: %d, count: %d, now: %d", packet[SN_POS], count, TIMER_TIMESTAMP.p_reg->CC[0]);
         // Bisognerebbe salvare questa variabile da qualche parte
          packet_lost++;
          count++;
@@ -458,12 +459,12 @@ void nrf_802154_received_raw(uint8_t * p_data, int8_t power, uint8_t lqi)
       } else
       {
          TIMER_TIMESTAMP.p_reg->TASKS_CAPTURE[0] = 1;
-         //NRF_LOG_INFO("Ok: received: %d, count: %d, now: %d", packet[SN_POS], count, TIMER_TIMESTAMP.p_reg->CC[0]);
+         ////NRF_LOG_INFO("Ok: received: %d, count: %d, now: %d", packet[SN_POS], count, TIMER_TIMESTAMP.p_reg->CC[0]);
          if (enable_uart)
          {
             ret_code_t err_code = nrf_drv_uart_tx(&uart_inst, tx_uart_buff, 20);
             APP_ERROR_CHECK(err_code);
-            //NRF_LOG_INFO("%x %x %x %x %x",tx_uart_buff[0], tx_uart_buff[1], tx_uart_buff[2], tx_uart_buff[3], tx_uart_buff[4]);
+            ////NRF_LOG_INFO("%x %x %x %x %x",tx_uart_buff[0], tx_uart_buff[1], tx_uart_buff[2], tx_uart_buff[3], tx_uart_buff[4]);
          }
          if (enable_reconstruction)
          {
@@ -474,11 +475,11 @@ void nrf_802154_received_raw(uint8_t * p_data, int8_t power, uint8_t lqi)
             {
                if (packet[i] != 0)
                {
-                  NRF_LOG_INFO("%d", packet[i]);
+                  //NRF_LOG_INFO("%d", packet[i]);
                   TIMER_RECONSTRUCTION.p_reg->CC[i-MAC_PAYLOAD_POS] = packet[i];
                   TIMER_RECONSTRUCTION.p_reg->INTENSET = (uint32_t)mask_int << 16UL + (i-MAC_PAYLOAD_POS);
                   index = i + 1;
-                  NRF_LOG_INFO("INSID RECONSTRUCTION");
+                  //NRF_LOG_INFO("INSID RECONSTRUCTION");
                } else
                {
                   // Se trovo uno zero esco dal ciclo (tutti i compare sono stati settati)
@@ -487,8 +488,8 @@ void nrf_802154_received_raw(uint8_t * p_data, int8_t power, uint8_t lqi)
             }
             if (index != MAC_PAYLOAD_POS)
             {
-               NRF_LOG_INFO("TIMER_STARTED");
-               NRF_LOG_INFO("%x", TIMER_RECONSTRUCTION.p_reg->INTENSET);
+               //NRF_LOG_INFO("TIMER_STARTED");
+               //NRF_LOG_INFO("%x", TIMER_RECONSTRUCTION.p_reg->INTENSET);
                TIMER_RECONSTRUCTION.p_reg->TASKS_START = 1;// Start the timer
             }
          }
@@ -500,7 +501,7 @@ void nrf_802154_received_raw(uint8_t * p_data, int8_t power, uint8_t lqi)
    else
    {
    count = packet[MAC_PAYLOAD_POS];
-   NRF_LOG_INFO("Count received: %d", count);
+   //NRF_LOG_INFO("Count received: %d", count);
    }
    */
 }
@@ -508,13 +509,13 @@ void nrf_802154_received_raw(uint8_t * p_data, int8_t power, uint8_t lqi)
 void nrf_802154_receive_failed(nrf_802154_rx_error_t error)
 {
    TIMER_TIMESTAMP.p_reg->TASKS_CAPTURE[0] = 1;
-   NRF_LOG_INFO("Error: %d, TIme: %d", error, TIMER_TIMESTAMP.p_reg->CC[0]);
+   //NRF_LOG_INFO("Error: %d, TIme: %d", error, TIMER_TIMESTAMP.p_reg->CC[0]);
    packet_lost++;
 }
 
 void nrf_802154_tx_ack_started(const uint8_t* p_data)
 {
-//NRF_LOG_INFO("Sending ACK");
+////NRF_LOG_INFO("Sending ACK");
 }
 /**
 *@}

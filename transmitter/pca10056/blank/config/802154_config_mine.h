@@ -1,6 +1,6 @@
 // Channel from 11 to 26
 #ifndef CHANNEL
-#define CHANNEL 15
+#define CHANNEL 11
 #endif
 
 // PAN ID (2 BYTES LITTLE-ENDIAN)

@@ -75,7 +75,7 @@
 
 #define WINDOW_LENGTH                  7
 #define TIMER_SIMULATION_LENGTH        1 /*Simulazione onda quadra*/
-#define TX_POWER                       0 /*Power in dBm*/
+#define TX_POWER                       -20 /*Power in dBm*/
 
 #define CONFIG_802154_COMPLETE_LED     BSP_BOARD_LED_0 /*I LED 1 e 2 non possono venire usati con 802.15.4*/
 #define NOTIF_ON_LED                   BSP_BOARD_LED_1
@@ -93,8 +93,8 @@ static volatile bool tx_in_progress = false;
 static volatile bool tx_done = true;
 static volatile bool begin_tx = false;
 
-bool enable_pin_out = false;
-bool enable_uart = false;
+bool enable_pin_out = true;
+bool enable_uart = true;
 
 bool notif_on = false;
 bool last_packet = false;
@@ -394,6 +394,8 @@ static void config_802154()
   #endif
   // Configure Packet
   configure_packets();
+  nrf_802154_channel_set(CHANNEL);
+  NRF_LOG_INFO("CHANNEL = %d", (uint8_t)nrf_802154_channel_get());
 }
 void timer_timestamp_event_handler(nrf_timer_event_t event_type, void* p_context)
 {

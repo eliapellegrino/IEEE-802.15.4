@@ -1,7 +1,9 @@
 <!DOCTYPE CrossStudio_Session_File>
 <session>
  <Bookmarks/>
- <Breakpoints groups="Breakpoints" active_group="Breakpoints"/>
+ <Breakpoints groups="Breakpoints" active_group="Breakpoints">
+  <Exceptions set="MemManage;UsageFault_Coprocessor;UsageFault_CheckingError;UsageFault_StateError;BusFault;ExceptionEntryReturnFault;HardFault"/>
+ </Breakpoints>
  <ExecutionProfileWindow/>
  <FrameBufferWindow>
   <FrameBufferWindow bufferHeight="-1" addressSpace="" addressText="" bufferWidth="-1"/>
@@ -22,14 +24,11 @@
   <ProjectSessionItem path="transmitter_pca10056"/>
   <ProjectSessionItem path="transmitter_pca10056;transmitter_pca10056"/>
   <ProjectSessionItem path="transmitter_pca10056;transmitter_pca10056;Application"/>
-  <ProjectSessionItem path="transmitter_pca10056;transmitter_pca10056;Board Definition"/>
   <ProjectSessionItem path="transmitter_pca10056;transmitter_pca10056;nRF_802154"/>
   <ProjectSessionItem path="transmitter_pca10056;transmitter_pca10056;nRF_Drivers"/>
-  <ProjectSessionItem path="transmitter_pca10056;transmitter_pca10056;nRF_Libraries"/>
-  <ProjectSessionItem path="transmitter_pca10056;transmitter_pca10056;nRF_Log"/>
  </Project>
  <Register1>
-  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp;CPU/internal;UARTE0/TASKS_STARTRX;UARTE0/TASKS_STOPRX;UARTE0/TASKS_STARTTX;UARTE0/TASKS_STOPTX;UARTE0/TASKS_FLUSHRX;UARTE0/EVENTS_CTS;UARTE0/EVENTS_NCTS;UARTE0/EVENTS_RXDRDY;UARTE0/EVENTS_ENDRX;UARTE0/EVENTS_TXDRDY;UARTE0/EVENTS_ENDTX;UARTE0/EVENTS_ERROR;UARTE0/EVENTS_RXTO;UARTE0/EVENTS_RXSTARTED;UARTE0/EVENTS_TXSTARTED;UARTE0/EVENTS_TXSTOPPED;UARTE0/SHORTS;UARTE0/INTEN;UARTE0/INTENSET;UARTE0/INTENCLR;UARTE0/ERRORSRC;UARTE0/ENABLE;UARTE0/BAUDRATE;UARTE0/CONFIG;UARTE0/PSEL.RTS;UARTE0/PSEL.TXD;UARTE0/PSEL.CTS;UARTE0/PSEL.RXD;UARTE0/RXD.PTR;UARTE0/RXD.MAXCNT;UARTE0/RXD.AMOUNT;UARTE0/TXD.PTR;UARTE0/TXD.MAXCNT;UARTE0/TXD.AMOUNT;UARTE1/TASKS_STARTRX;UARTE1/TASKS_STOPRX;UARTE1/TASKS_STARTTX;UARTE1/TASKS_STOPTX;UARTE1/TASKS_FLUSHRX;UARTE1/EVENTS_CTS;UARTE1/EVENTS_NCTS;UARTE1/EVENTS_RXDRDY;UARTE1/EVENTS_ENDRX;UARTE1/EVENTS_TXDRDY;UARTE1/EVENTS_ENDTX;UARTE1/EVENTS_ERROR;UARTE1/EVENTS_RXTO;UARTE1/EVENTS_RXSTARTED;UARTE1/EVENTS_TXSTARTED;UARTE1/EVENTS_TXSTOPPED;UARTE1/SHORTS;UARTE1/INTEN;UARTE1/INTENSET;UARTE1/INTENCLR;UARTE1/ERRORSRC;UARTE1/ENABLE;UARTE1/BAUDRATE;UARTE1/CONFIG;UARTE1/PSEL.RTS;UARTE1/PSEL.TXD;UARTE1/PSEL.CTS;UARTE1/PSEL.RXD;UARTE1/RXD.PTR;UARTE1/RXD.MAXCNT;UARTE1/RXD.AMOUNT;UARTE1/TXD.PTR;UARTE1/TXD.MAXCNT;UARTE1/TXD.AMOUNT;UART0/TASKS_STARTRX;UART0/TASKS_STOPRX;UART0/TASKS_STARTTX;UART0/TASKS_STOPTX;UART0/TASKS_SUSPEND;UART0/EVENTS_CTS;UART0/EVENTS_NCTS;UART0/EVENTS_RXDRDY;UART0/EVENTS_TXDRDY;UART0/EVENTS_ERROR;UART0/EVENTS_RXTO;UART0/SHORTS;UART0/INTENSET;UART0/INTENCLR;UART0/ERRORSRC;UART0/ENABLE;UART0/RXD;UART0/TXD;UART0/BAUDRATE;UART0/CONFIG;UART0/PSEL.RTS;UART0/PSEL.TXD;UART0/PSEL.CTS;UART0/PSEL.RXD" binaryNodes="" asciiNodes="" openNodes="UART0" name="transmitter_pca10056" decimalNodes="" octalNodes="" unsignedNodes=""/>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="transmitter_pca10056" decimalNodes="" octalNodes="" unsignedNodes=""/>
  </Register1>
  <Register2>
   <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="transmitter_pca10056" decimalNodes="" octalNodes="" unsignedNodes=""/>
@@ -47,17 +46,7 @@
   <Trace enabled="Yes"/>
  </TraceWindow>
  <Watch1>
-  <Watches active="1" update="Never">
-   <Watchpoint expression="laddr" name="laddr" radix="16" linenumber="803" filename="../../../main.c"/>
-   <Watchpoint expression="saddr" name="saddr" radix="16" linenumber="799" filename="../../../main.c"/>
-   <Watchpoint expression="time_ticks" name="time_ticks" radix="16" linenumber="983" filename="../../../main.c"/>
-   <Watchpoint expression="p_ack" name="p_ack" radix="16" linenumber="1041" filename="../../../main.c"/>
-   <Watchpoint expression="p_frame" name="p_frame" radix="16" linenumber="1041" filename="../../../main.c"/>
-   <Watchpoint expression="packet" name="packet" radix="-1" linenumber="1019" filename="../../../main.c"/>
-   <Watchpoint expression="frame_control" name="frame_control" radix="16" linenumber="866" filename="../../../main.c"/>
-   <Watchpoint expression="notif_on_packet" name="notif_on_packet" radix="16" linenumber="901" filename="../../../main.c"/>
-   <Watchpoint expression="notif_packet" name="notif_packet" radix="16" linenumber="902" filename="../../../main.c"/>
-  </Watches>
+  <Watches active="1" update="Never"/>
  </Watch1>
  <Watch2>
   <Watches active="0" update="Never"/>
@@ -69,17 +58,20 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="44" y="410" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../main.c" selected="0" top="386" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="26" y="40" useTextEdit="1" openedFrom="C:/Users/eliap/Desktop/Tesi/Firmware/Segger/nRF52840/SDKT&amp;Z/examples/miei esempi/IEEE_802.15.4/transmitter/main.c" useBinaryEdit="0" left="0" path="../config/802154_config_mine.h" selected="0" top="26" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="373" useTextEdit="1" openedFrom="C:/Users/eliap/Desktop/Tesi/Firmware/Segger/nRF52840/SDKT&amp;Z/examples/miei esempi/IEEE_802.15.4/transmitter/main.c" useBinaryEdit="0" left="0" path="../../../../../../../external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154.c" selected="0" top="361" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="50" useTextEdit="1" openedFrom="C:/Users/eliap/Desktop/Tesi/Firmware/Segger/nRF52840/SDKT&amp;Z/external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154.c" useBinaryEdit="0" left="0" path="../../../../../../../external/nRF-IEEE-802.15.4-radio-driver/src/mac_features/nrf_802154_csma_ca.h" selected="0" top="42" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="351" useTextEdit="1" openedFrom="C:/Users/eliap/Desktop/Tesi/Firmware/Segger/nRF52840/SDKT&amp;Z/external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154.c" useBinaryEdit="0" left="0" path="../../../../../../../external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154_config.h" selected="0" top="336" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="190" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../../../../../external/nRF-IEEE-802.15.4-radio-driver/src/mac_features/nrf_802154_csma_ca.c" selected="0" top="175" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="377" useTextEdit="1" openedFrom="C:/Users/eliap/Desktop/Tesi/Firmware/Segger/nRF52840/SDKT&amp;Z/external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154.c" useBinaryEdit="0" left="0" path="../../../../../../../external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154.h" selected="0" top="353" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="76" useTextEdit="1" openedFrom="C:/Users/eliap/Desktop/Tesi/Firmware/Segger/nRF52840/SDKT&amp;Z/external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154.c" useBinaryEdit="0" left="0" path="../../../../../../../external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154_request_direct.c" selected="0" top="65" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="1693" useTextEdit="1" openedFrom="C:/Users/eliap/Desktop/Tesi/Firmware/Segger/nRF52840/SDKT&amp;Z/external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154_request_direct.c" useBinaryEdit="0" left="0" path="../../../../../../../external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154_core.c" selected="0" top="1676" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../config/sdk_config.h" selected="0" top="42" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="45" y="1023" useTextEdit="1" openedFrom="C:/Users/eliap/Desktop/Tesi/Firmware/Segger/nRF52840/SDKT&amp;Z/external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154_core.c" useBinaryEdit="0" left="0" path="../../../../../../../modules/nrfx/hal/nrf_radio.h" selected="1" top="1009" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="44" y="492" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../main.c" selected="1" top="474" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="2" useTextEdit="1" openedFrom="C:/Users/eliap/Desktop/Tesi/Firmware/Segger/nRF52840/SDKT&amp;Z/examples/miei esempi/IEEE_802.15.4/transmitter/main.c" useBinaryEdit="0" left="0" path="../config/802154_config_mine.h" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="12" y="144" useTextEdit="1" openedFrom="C:/Users/eliap/Desktop/Tesi/Firmware/Segger/nRF52840/SDKT&amp;Z/examples/miei esempi/IEEE_802.15.4/transmitter/main.c" useBinaryEdit="0" left="0" path="../../../../../../../external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154.c" selected="0" top="130" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="12" y="514" useTextEdit="1" openedFrom="C:/Users/eliap/Desktop/Tesi/Firmware/Segger/nRF52840/SDKT&amp;Z/external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154_request_direct.c" useBinaryEdit="0" left="0" path="../../../../../../../external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154_core.c" selected="0" top="500" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="71" useTextEdit="1" openedFrom="C:/Users/eliap/Desktop/Tesi/Firmware/Segger/nRF52840/SDKT&amp;Z/external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154_core.c" useBinaryEdit="0" left="0" path="../../../../../../../external/nRF-IEEE-802.15.4-radio-driver/src/mac_features/ack_generator/nrf_802154_ack_generator.c" selected="0" top="65" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="319" useTextEdit="1" openedFrom="C:/Users/eliap/Desktop/Tesi/Firmware/Segger/nRF52840/SDKT&amp;Z/external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154.c" useBinaryEdit="0" left="0" path="../../../../../../../external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154_config.h" selected="0" top="304" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="C:/Users/eliap/Desktop/Tesi/Firmware/Segger/nRF52840/SDKT&amp;Z/external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154.c" useBinaryEdit="0" left="0" path="../../../../../../../external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154_const.h" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="129" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../../../../../components/drivers_nrf/radio_config/radio_config.c" selected="0" top="126" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="589" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../../../../../external/nRF-IEEE-802.15.4-radio-driver/src/mac_features/ack_generator/nrf_802154_ack_data.c" selected="0" top="575" codecName=""/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="647" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../../../../../modules/nrfx/hal/nrf_timer.h" selected="0" top="630" codecName=""/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="52" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../../../../../external/nRF-IEEE-802.15.4-radio-driver/src/mac_features/ack_generator/nrf_802154_imm_ack_generator.c" selected="0" top="36" codecName=""/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="123" useTextEdit="1" openedFrom="" useBinaryEdit="0" left="0" path="../../../../../../../external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154_pib.c" selected="0" top="116" codecName=""/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="102" useTextEdit="1" openedFrom="C:/Users/eliap/Desktop/Tesi/Firmware/Segger/nRF52840/SDKT&amp;Z/external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154.c" useBinaryEdit="0" left="0" path="../../../../../../../external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154.h" selected="0" top="81" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="107" useTextEdit="1" openedFrom="C:/Users/eliap/Desktop/Tesi/Firmware/Segger/nRF52840/SDKT&amp;Z/external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154.c" useBinaryEdit="0" left="0" path="../../../../../../../external/nRF-IEEE-802.15.4-radio-driver/src/nrf_802154_request_direct.c" selected="0" top="91" codecName="Default"/>
  </Files>
- <ARMCrossStudioWindow activeProject="transmitter_pca10056" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Release" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/Users/eliap/Desktop/SynologyDrive/materiale elia/tesi/nRF52840/SDKT&amp;Z/examples/miei esempi/radio/transmitter/pca10056/blank/config" debugSearchPath="" autoConnectCapabilities="3199"/>
+ <ARMCrossStudioWindow activeProject="transmitter_pca10056" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="" debugSearchPath="" autoConnectCapabilities="3711"/>
 </session>
